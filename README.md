@@ -1,6 +1,9 @@
 # Operation Checkmate — מעבדת בדיקות חדירה וחקירת רשת
 <img width="1913" height="502" alt="image" src="[https://github.com/user-attachments/assets/06ce3214-b813-4ec1-8589-d4b41995618f](https://github.com/user-attachments/assets/06ce3214-b813-4ec1-8589-d4b41995618f)" />
 
+<img width="1906" height="545" alt="image" src="https://github.com/user-attachments/assets/bfcabbb9-45a7-4deb-860d-d6cf2cf0cd36" />
+
+
 ## סקירה כללית
 מעבדה זו מדמה סביבה ארגונית מותקפת ומעריכה את שרשרת התקיפה (Unified Kill Chain). התהליך מתחיל בבדיקת אבטחה של ממשק ניהול חיצוני של חומת אש (`firewall.thm:5001`), התקדמות להשגת גישה ראשונית (Initial Foothold), ובהמשך תנועה רוחבית (Lateral Movement) והתחמקות ממנגנוני זיהוי.
 
@@ -18,7 +21,6 @@
 ### 2. מתקפת כוח גס ובדיקת מילונים (Hydra)
 הופעלה בדיקת הזדהות אוטומטית באמצעות הכלי `hydra` מול טופס ההתחברות תוך שימוש במילון הבסיסי של המערכת:
 
-```bash
 hydra -l admin \
   -P /usr/share/wordlists/fasttrack.txt \
   -f -V -t4 \
