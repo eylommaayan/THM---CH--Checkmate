@@ -106,3 +106,6 @@ hydra -l admin \
 
 <img width="1906" height="820" alt="image" src="https://github.com/user-attachments/assets/7315da29-e027-44ba-b52e-7b67c52798db" />
 
+<img width="1907" height="817" alt="image" src="https://github.com/user-attachments/assets/c04e75fb-33f9-4a9a-9f16-2228f5104ba0" />
+
+
