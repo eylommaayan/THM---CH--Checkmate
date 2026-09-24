@@ -67,41 +67,43 @@ social.thm מפנה לפלטפורמה החברתית.
 מידע זה קריטי מכיוון שכלי ה-Hydra דורש את נתיב ההתחברות, פרמטרי ה-POST ומחרוזת תנאי הכישלון.
 <img width="932" height="812" alt="image" src="https://github.com/user-attachments/assets/9cc27764-f859-4112-9c2d-94a5a72c316a" />
 
-מכיוון שהאתגר מציין במפורש פרטי ברירת מחדל, השתמשתי במילון סיסמאות ברירת מחדל מתוך SecLists.
 
-פקודה:
 
-Bash
+הנה ניסוח ממוקד, קריא וטכני:
+
+---
+
+### שלב 1: פיצוח סיסמת ברירת מחדל עם Hydra
+
+מאחר שהאתגר רמז על שימוש בפרטי ברירת מחדל, הרצנו מתקפת Brute-Force מול ממשק חומת האש באמצעות מילון ייעודי מתוך **SecLists**:
+
+```bash
 hydra -l admin \
-  -P seclists/Passwords/Default-Credentials/default-passwords.txt \
-  -f -V -t4 \
-  -s 5001 \
-  firewall.thm http-post-form \
+  -P /usr/share/seclists/Passwords/Default-Credentials/default-passwords.txt \
+  -f -V -t4 -s 5001 firewall.thm http-post-form \
   "/login:username=^USER^&password=^PASS^:Invalid credentials."
--l admin: שם המשתמש לבדיקה.
 
--P: נתיב למילון הסיסמאות.
+```
 
--f: עצירה מיד עם מציאת פרטי התחברות תקפים.
+#### פירוט הדגלים והפרמטרים:
 
--V: פלט מפורט (Verbose).
+* **`-l admin`**: שם המשתמש לבדיקה.
+* **`-P <path>`**: נתיב למילון סיסמאות ברירת המחדל.
+* **`-s 5001`**: פורט היעד.
+* **`-f`**: עצירה מידית בעת מציאת הסיסמה הנכונה.
+* **`-t4`**: הרצה ב-4 תהליכים מקבילים.
+* **`-V`**: הצגת פלט מפורט בזמן אמת.
+* **`http-post-form`**: מודול להזדהות בטופסי POST.
+* **מבנה הבקשה (`"/login:..."`)**:
+* `/login` – נתיב טופס ההתחברות.
+* `username=^USER^&password=^PASS^` – שדות הטופס שבהם מוזרקים הערכים.
+* `Invalid credentials.` – הודעת השגיאה; העדרה מעיד על הצלחת ההתחברות.
 
--t4: שימוש ב-4 תהליכים מקבילים.
 
--s 5001: פורט היעד.
 
-http-post-form: מודול Hydra המיועד להזדהות בטפסי POST.
+**תוצאה:** Hydra פיצח את הסיסמה והושגה גישה לממשק הניהול של חומת האש.
 
-ארגומנטים עבור מודול HTTP-POST-Form ב-Hydra:
-"/login:username=^USER^&password=^PASS^:Invalid credentials."
 
-נתיב ההתחברות (/login): הדף האחראי על ביצוע ההזדהות.
-
-מבנה הבקשה (username=^USER^&password=^PASS^): Hydra מחליף דינמית את ^USER^ ואת ^PASS^ בערכים מתוך המילון במהלך המתקפה.
-
-תנאי כשלון (Invalid credentials.): Hydra בודק כל תגובה לקיומה של מחרוזת זו. אם המחרוזת נעלמת, Hydra מזהה שההתחברות הצליחה.
-
-לאחר מספר ניסיונות, Hydra זיהה בהצלחה את סיסמת הניהול התקפה של ממשק חומת האש. באמצעות פרטי הזדהות אלו, השגתי גישה לאפליקציית חומת האש הפנימית.
 <img width="1906" height="820" alt="image" src="https://github.com/user-attachments/assets/7315da29-e027-44ba-b52e-7b67c52798db" />
 
 מה הוא עושה בשלבים הבאים (צעדי ההמשך של החדר)
