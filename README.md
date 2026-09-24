@@ -75,6 +75,27 @@ social.thm מפנה לפלטפורמה החברתית.
 
 ### שלב 1: פיצוח סיסמת ברירת מחדל עם Hydra
 
+
+שלב 1: התקנת/הורדת SecLists (אם אין לך)
+אם המילון לא קיים אצלך במערכת, התקן אותו:
+
+Bash
+sudo apt update && sudo apt install -y seclists
+
+<img width="1052" height="772" alt="image" src="https://github.com/user-attachments/assets/3775eac5-379a-4f62-b6ee-ad739211389e" />
+להוריד ישירות את הקובץ הספציפי (הכי מהיר ובטוח)
+במקום להתקין את כל מאגר SecLists (ששוקל מאות מגה-בייטים), אפשר להוריד ישירות את הקובץ הספציפי שבו השתמש המדריך מתוך ה-GitHub הרשמי של SecLists.
+
+לחץ Ctrl + C כדי לעצור את ה-find, והרץ את הפקודות הבאות:
+
+Bash
+mkdir -p seclists/Passwords/Default-Credentials/
+wget -O seclists/Passwords/Default-Credentials/default-passwords.txt https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Default-Credentials/default-passwords.txt
+הפקודה תחזיר לך שורה (נתיב). ב-Kali / AttackBox זה לרוב יהיה:
+/usr/share/wordlists/seclists/Passwords/Default-Credentials/default-passwords.txt
+
+
+
 מאחר שהאתגר רמז על שימוש בפרטי ברירת מחדל, הרצנו מתקפת Brute-Force מול ממשק חומת האש באמצעות מילון ייעודי מתוך **SecLists**:
 
 ```bash
