@@ -36,8 +36,6 @@
 <img width="943" height="835" alt="image" src="https://github.com/user-attachments/assets/73452736-12f7-49fe-9321-2df2cdf559ad" />
 
 
-<img width="927" height="128" alt="image" src="https://github.com/user-attachments/assets/a37e03ee-45c5-4485-89f3-02072f083674" />
-מידע זה קריטי מכיוון שכלי ה-Hydra דורש את נתיב ההתחברות, פרמטרי ה-POST ומחרוזת תנאי הכישלון.
 <img width="932" height="812" alt="image" src="https://github.com/user-attachments/assets/9cc27764-f859-4112-9c2d-94a5a72c316a" />
 
 
