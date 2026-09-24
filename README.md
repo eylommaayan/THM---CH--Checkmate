@@ -22,8 +22,16 @@
 מהלך העבודה (Walkthrough)
 כדי להתחיל באתגר, הפעלתי תחילה את מופע מכונת היעד מלוח הבקרה של חדר ה-TryHackMe. לאחר מספר רגעים, הפלטפורמה הקצתה כתובת IP ייעודית שמארחת את כל השירותים הפגיעים בחדר.
 
-ראשית, ניגשתי לאפליקציה הראשית בכתובת: http://<TARGET_IP>:5000/
 
+
+שלב 1: הבנת המטרה וזיהוי השירות
+היעד: ממשק ניהול של חומת אש (Firewall Management Console).
+
+כתובת ופורט: [http://firewall.thm:5001](http://firewall.thm:5001).
+
+הרמז מהתרחיש: מרקו (מנהל המערכת) התקין את חומת האש אך שכח לשנות את פרטי ברירת המחדל של המערכת (Default Credentials).
+
+שם המשתמש המשוער: admin (ברירת מחדל סטנדרטית למערכות כאלה).
 
 <img width="943" height="835" alt="image" src="https://github.com/user-attachments/assets/73452736-12f7-49fe-9321-2df2cdf559ad" />
 
@@ -46,41 +54,22 @@ jobs.thm מפנה לפורטל העובדים.
 
 social.thm מפנה לפלטפורמה החברתית.
 <img width="927" height="128" alt="image" src="https://github.com/user-attachments/assets/a37e03ee-45c5-4485-89f3-02072f083674" />
-
-שלב 1 (LEVEL 1)
-מרקו פרס חומת אש בכתובת firewall.thm:5001 אך השאיר את פרטי ברירת המחדל.
-
-האתגר הראשון כולל ממשק ניהול חומת אש הרץ על firewall.thm:5001. תיאור החדר רומז שמרקו פרס את חומת האש אך שכח לשנות את פרטי ברירת המחדל.
-
-לאחר פתיחת דף ההתחברות בדפדפן, בדקתי את בקשת ההזדהות באמצעות כלי הפיתוח (Developer Tools). בלשונית ה-Network, ביצעתי ניסיון התחברות שגוי וניתחתי את הבקשה והתגובה.
-
-מתוך הבקשה שנלכדה, זיהיתי:
-
-שיטת הבקשה (Request Method): POST
-
-נתיב ההתחברות (Login Endpoint): /login
-
-פרמטרים (Parameters): username, password
-
-הודעת שגיאה (Failure Message): Invalid credentials.
-
 מידע זה קריטי מכיוון שכלי ה-Hydra דורש את נתיב ההתחברות, פרמטרי ה-POST ומחרוזת תנאי הכישלון.
 <img width="932" height="812" alt="image" src="https://github.com/user-attachments/assets/9cc27764-f859-4112-9c2d-94a5a72c316a" />
 
 
 
-הנה ניסוח ממוקד, קריא וטכני:
 
 ---
 
-### שלב 1: פיצוח סיסמת ברירת מחדל עם Hydra
+שלב 1: הבנת המטרה וזיהוי השירות
+היעד: ממשק ניהול של חומת אש (Firewall Management Console).
 
+כתובת ופורט: [http://firewall.thm:5001](http://firewall.thm:5001).
 
-שלב 1: התקנת/הורדת SecLists (אם אין לך)
-אם המילון לא קיים אצלך במערכת, התקן אותו:
+הרמז מהתרחיש: מרקו (מנהל המערכת) התקין את חומת האש אך שכח לשנות את פרטי ברירת המחדל של המערכת (Default Credentials).
 
-Bash
-sudo apt update && sudo apt install -y seclists
+שם המשתמש המשוער: admin (ברירת מחדל סטנדרטית למערכות כאלה).
 
 <img width="1052" height="772" alt="image" src="https://github.com/user-attachments/assets/3775eac5-379a-4f62-b6ee-ad739211389e" />
 להוריד ישירות את הקובץ הספציפי (הכי מהיר ובטוח)
