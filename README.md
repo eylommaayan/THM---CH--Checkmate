@@ -35,24 +35,7 @@
 
 <img width="943" height="835" alt="image" src="https://github.com/user-attachments/assets/73452736-12f7-49fe-9321-2df2cdf559ad" />
 
-לאחר מכן הגדרתי מיפוי שמות סטטי (Host Mapping) כדי לאפשר גישה למארחים הווירטואליים של היעד, ערכתי את הקובץ המקומי /etc/hosts והוספתי את הרשומה הבאה:
-<TARGET_IP> firewall.thm jobs.thm social.thm
 
-
-
-השתמשתי בפקודה הבאה לעריכת קובץ ה-hosts:
-
-Bash
-echo "10.48.129.160 firewall.thm jobs.thm social.thm" | sudo tee -a /etc/hosts
-מטרה: לאפשר לדפדפן ולכלי שורת הפקודה לתקשר עם אפליקציות ייעודיות המאוחסנות על אותו שרת באמצעות ניתוב מארחים וירטואליים (Virtual Host / VHost).
-
-על ידי הגדרת פענוח שמות מקומי:
-
-firewall.thm מפנה לאפליקציית חומת האש.
-
-jobs.thm מפנה לפורטל העובדים.
-
-social.thm מפנה לפלטפורמה החברתית.
 <img width="927" height="128" alt="image" src="https://github.com/user-attachments/assets/a37e03ee-45c5-4485-89f3-02072f083674" />
 מידע זה קריטי מכיוון שכלי ה-Hydra דורש את נתיב ההתחברות, פרמטרי ה-POST ומחרוזת תנאי הכישלון.
 <img width="932" height="812" alt="image" src="https://github.com/user-attachments/assets/9cc27764-f859-4112-9c2d-94a5a72c316a" />
